@@ -1,17 +1,18 @@
-from models.trip import TripResponse
+from models.trip import TripRequest, TripResponse
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def generate_itinerary(trip: TripResponse):
+def generate_itinerary(trip: TripRequest):
     completion = client.chat.completions.create(
         model="gpt-5.4-nano",
         messages=[
-            {"role": "developer", "content": """
+            {"role": "system", "content": """
 You are an expert travel planner with deep knowledge of destinations worldwide. 
 You create detailed, personalised day-by-day itineraries based on the traveller's 
 preferences, budget, and interests.
@@ -45,8 +46,12 @@ Rules:
  """},
             {
                 "role": "user", 
-                "content": f"{trip}"
+                "content": f"""
+                Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of {trip.budget} for {trip.number_of_travellers} traveller(s). 
+                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}
+"""
             }
         ]
     )
-    return completion.choices[0].message.content
+    raw = json.loads(completion.choices[0].message.content)
+    return TripResponse(**raw)
