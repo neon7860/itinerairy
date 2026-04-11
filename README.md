@@ -29,3 +29,6 @@ An AI-powered travel planning app that generates personalised day-by-day itinera
 
 ### DevOps
 - GitHub Actions — CI/CD pipeline
+
+venv\Scripts\activate
+uvicorn main:app --reload

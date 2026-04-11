@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from models.trip import TripRequest, DayPlan, TripResponse
+from services.ai_service import generate_itinerary
 
 router = APIRouter()
 
@@ -13,5 +14,6 @@ def itinerary_response(trip_request: TripRequest):
         afternoon_plan="Explore Akihabara",
         evening_plan="Dinner in Shinjuku"
     )
+    ai_response = generate_itinerary(generate_itinerary)
     
-    return TripResponse(destination=trip_request.destination, days=trip_request.days, estimated_costs=trip_request.budget, day_plans=[day])
+    return ai_response

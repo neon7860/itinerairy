@@ -9,7 +9,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_itinerary(trip: TripResponse):
     completion = client.chat.completions.create(
-        model="gpt-5.2",
+        model="gpt-5.4-nano",
         messages=[
             {"role": "developer", "content": """
 You are an expert travel planner with deep knowledge of destinations worldwide. 
@@ -45,8 +45,8 @@ Rules:
  """},
             {
                 "role": "user", 
-                "content": f""
+                "content": f"{trip}"
             }
         ]
     )
-    return completion
+    return completion.choices[0].message.content
