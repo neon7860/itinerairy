@@ -3,6 +3,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 import json
+from fastapi import HTTPException
 
 load_dotenv()
 
@@ -53,5 +54,10 @@ Rules:
             }
         ]
     )
-    raw = json.loads(completion.choices[0].message.content)
-    return TripResponse(**raw)
+    try:
+        raw = json.loads(completion.choices[0].message.content)
+        return TripResponse(**raw)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="AI returned invalid JSON")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Something went wrong: {e}")
