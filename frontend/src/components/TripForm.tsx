@@ -29,7 +29,7 @@ export default function TripForm() {
             <label>Enter your destination:</label>
             <input
                 type="text"
-                value={formData.destination}
+                value={formData.destination || ''}
                 onChange={(e) =>
                     setFormData({ ...formData, destination: e.target.value })
                 }
@@ -38,7 +38,7 @@ export default function TripForm() {
             <label>Enter the number of days you will stay for:</label>
             <input
                 type="number"
-                value={formData.days}
+                value={formData.days || ''}
                 onChange={(e) =>
                     setFormData({
                         ...formData,
@@ -50,7 +50,7 @@ export default function TripForm() {
             <label>Enter your budget:</label>
             <input
                 type="number"
-                value={formData.budget}
+                value={formData.budget || ''}
                 onChange={(e) =>
                     setFormData({
                         ...formData,
@@ -109,7 +109,7 @@ export default function TripForm() {
             <label>Enter your interests below:</label>
             <input
                 type="text"
-                value={formData.interests}
+                value={formData.interests || ''}
                 onChange={(e) =>
                     setFormData({
                         ...formData,
@@ -121,7 +121,7 @@ export default function TripForm() {
             <label>Enter the number of travellers:</label>
             <input
                 type="number"
-                value={formData.number_of_travellers}
+                value={formData.number_of_travellers || ''}
                 onChange={(e) =>
                     setFormData({
                         ...formData,
