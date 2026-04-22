@@ -40,7 +40,10 @@ export default function TripForm() {
                 type="number"
                 value={formData.days}
                 onChange={(e) =>
-                    setFormData({ ...formData, days: parseInt(e.target.value) })
+                    setFormData({
+                        ...formData,
+                        days: parseInt(e.target.value) || 0,
+                    })
                 }
             ></input>
 
