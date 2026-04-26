@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import type { TripRequest } from '../types.ts'
+import type { TripRequest, TripResponse } from '../types.ts'
 import { generateItinerary } from '../services/api.ts'
 
-export default function TripForm() {
+export default function TripForm({ onItineraryGenerated }): TripResponse {
     const [formData, setFormData] = useState<TripRequest>({
         destination: '',
         days: 0,
@@ -17,7 +17,7 @@ export default function TripForm() {
         try {
             console.log('Sending response!')
             const res = await generateItinerary(formData)
-            console.log(res)
+            onItineraryGenerated(res)
         } catch (err) {
             console.log(`Error: ${err}`)
             throw err
