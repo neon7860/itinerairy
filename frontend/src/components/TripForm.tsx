@@ -87,7 +87,6 @@ export default function TripForm() {
                             pace_preference: e.target.value,
                         })
                     }
-                    checked={true}
                 ></input>
                 Medium paced
             </label>
@@ -135,7 +134,7 @@ export default function TripForm() {
             <p>Budget: {formData.budget || 0}</p>
             <p>Pace: {formData.pace_preference}</p>
             <p>Interests: {formData.interests}</p>
-            <p>Number of travellers: {formData.number_of_travellers} || 1</p>
+            <p>Number of travellers: {formData.number_of_travellers || 1}</p>
 
             <button type="submit">Get Itinerary</button>
         </form>
