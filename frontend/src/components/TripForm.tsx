@@ -2,7 +2,11 @@ import { useState } from 'react'
 import type { TripRequest, TripResponse } from '../types.ts'
 import { generateItinerary } from '../services/api.ts'
 
-export default function TripForm({ onItineraryGenerated }): TripResponse {
+interface TripResponseForm {
+    onItineraryGenerated: (data: TripResponse) => void
+}
+
+export default function TripForm({ onItineraryGenerated }: TripResponseForm) {
     const [formData, setFormData] = useState<TripRequest>({
         destination: '',
         days: 0,

@@ -5,9 +5,9 @@ import ItineraryDisplay from './components/ItineraryDisplay.tsx'
 import type { TripResponse } from './types.ts'
 
 function App() {
-    const [itinerary, setItinerary] = useState<TripResponse>()
+    const [itinerary, setItinerary] = useState<TripResponse | null>(null)
 
-    function handleItineraryGenerated(response) {
+    function handleItineraryGenerated(response: TripResponse) {
         setItinerary(response)
     }
 
