@@ -4,9 +4,13 @@ import { generateItinerary } from '../services/api.ts'
 
 interface TripResponseForm {
     onItineraryGenerated: (data: TripResponse) => void
+    onItineraryLoading: (data: boolean) => void
 }
 
-export default function TripForm({ onItineraryGenerated }: TripResponseForm) {
+export default function TripForm({
+    onItineraryGenerated,
+    onItineraryLoading,
+}: TripResponseForm) {
     const [formData, setFormData] = useState<TripRequest>({
         destination: '',
         days: 0,
@@ -20,11 +24,13 @@ export default function TripForm({ onItineraryGenerated }: TripResponseForm) {
         e.preventDefault()
         try {
             console.log('Sending response!')
+            onItineraryLoading(true)
             const res = await generateItinerary(formData)
             onItineraryGenerated(res)
         } catch (err) {
             console.log(`Error: ${err}`)
-            throw err
+        } finally {
+            onItineraryLoading(false)
         }
     }
 

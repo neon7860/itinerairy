@@ -3,21 +3,30 @@ import DayCard from './DayCard.tsx'
 
 interface itineraryProps {
     itinerary: TripResponse
+    isLoading: boolean
 }
 
-export default function ItineraryDisplay({ itinerary }: itineraryProps) {
+export default function ItineraryDisplay({
+    itinerary,
+    isLoading,
+}: itineraryProps) {
     return (
         <>
-            <h1>Data</h1>
-            <p>Destination: {itinerary.destination}</p>
-            <p>Days: {itinerary.days}</p>
-            <p>Estimated costs: {itinerary.estimated_costs}</p>
-            <p>Day1 overview: {itinerary.day_plans[0].location}</p>
-            <div>
-                {itinerary.day_plans.map((day) => (
-                    <DayCard key={day.day_number} day={day} />
-                ))}
-            </div>
+            {isLoading ? (
+                <h1>Loading...</h1>
+            ) : (
+                <>
+                    <h1>Data</h1>
+                    <p>Destination: {itinerary.destination}</p>
+                    <p>Days: {itinerary.days}</p>
+                    <p>Estimated costs: {itinerary.estimated_costs}</p>
+                    <div>
+                        {itinerary.day_plans.map((day) => (
+                            <DayCard key={day.day_number} day={day} />
+                        ))}
+                    </div>
+                </>
+            )}
         </>
     )
 }
