@@ -2,7 +2,7 @@ import type { TripResponse } from '../types.ts'
 import DayCard from './DayCard.tsx'
 
 interface itineraryProps {
-    itinerary: TripResponse
+    itinerary: TripResponse | null
     isLoading: boolean
 }
 
@@ -14,7 +14,7 @@ export default function ItineraryDisplay({
         <>
             {isLoading ? (
                 <h1>Loading...</h1>
-            ) : (
+            ) : itinerary !== null ? (
                 <>
                     <h1>Data</h1>
                     <p>Destination: {itinerary.destination}</p>
@@ -26,7 +26,7 @@ export default function ItineraryDisplay({
                         ))}
                     </div>
                 </>
-            )}
+            ) : null}
         </>
     )
 }

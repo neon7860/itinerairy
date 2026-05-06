@@ -22,7 +22,7 @@ function App() {
                 onItineraryGenerated={handleItineraryGenerated}
                 onItineraryLoading={handleItineraryLoading}
             />
-            {itinerary !== null && (
+            {(loading || itinerary !== null) && (
                 <ItineraryDisplay itinerary={itinerary} isLoading={loading} />
             )}
         </>
