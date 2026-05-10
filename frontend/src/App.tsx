@@ -16,6 +16,10 @@ function App() {
         setLoading(response)
     }
 
+    function handleItineraryReset() {
+        setItinerary(null)
+    }
+
     return (
         <>
             <TripForm
@@ -23,7 +27,11 @@ function App() {
                 onItineraryLoading={handleItineraryLoading}
             />
             {(loading || itinerary !== null) && (
-                <ItineraryDisplay itinerary={itinerary} isLoading={loading} />
+                <ItineraryDisplay
+                    itinerary={itinerary}
+                    isLoading={loading}
+                    itineraryReset={handleItineraryReset}
+                />
             )}
         </>
     )

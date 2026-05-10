@@ -4,11 +4,13 @@ import DayCard from './DayCard.tsx'
 interface itineraryProps {
     itinerary: TripResponse | null
     isLoading: boolean
+    itineraryReset: () => void
 }
 
 export default function ItineraryDisplay({
     itinerary,
     isLoading,
+    itineraryReset,
 }: itineraryProps) {
     return (
         <>
@@ -27,6 +29,9 @@ export default function ItineraryDisplay({
                     </div>
                 </>
             ) : null}
+            {itinerary !== null && (
+                <button onClick={itineraryReset}>Plan another trip</button>
+            )}
         </>
     )
 }

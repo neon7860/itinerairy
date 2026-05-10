@@ -11,14 +11,16 @@ export default function TripForm({
     onItineraryGenerated,
     onItineraryLoading,
 }: TripResponseForm) {
-    const [formData, setFormData] = useState<TripRequest>({
+    const initialFormState: TripRequest = {
         destination: '',
         days: 0,
         budget: 0,
         pace_preference: '',
         interests: [],
         number_of_travellers: 0,
-    })
+    }
+
+    const [formData, setFormData] = useState<TripRequest>(initialFormState)
 
     async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault()
@@ -27,6 +29,7 @@ export default function TripForm({
             onItineraryLoading(true)
             const res = await generateItinerary(formData)
             onItineraryGenerated(res)
+            setFormData(initialFormState)
         } catch (err) {
             console.log(`Error: ${err}`)
         } finally {
