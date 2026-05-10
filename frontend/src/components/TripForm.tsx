@@ -60,7 +60,7 @@ export default function TripForm({
                 }
             ></input>
 
-            <label>Enter your budget:</label>
+            <label>Enter your budget (£):</label>
             <input
                 type="number"
                 value={formData.budget || ''}

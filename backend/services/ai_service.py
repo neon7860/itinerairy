@@ -48,7 +48,7 @@ Rules:
             {
                 "role": "user", 
                 "content": f"""
-                Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of {trip.budget} for {trip.number_of_travellers} traveller(s). 
+                Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of £{trip.budget} for {trip.number_of_travellers} traveller(s). 
                 The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}
 """
             }
