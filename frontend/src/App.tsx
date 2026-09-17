@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react'
 import TripForm from './components/TripForm.tsx'
 import ItineraryDisplay from './components/ItineraryDisplay.tsx'
+import Header from './components/Header.tsx'
 import type { TripResponse } from './types.ts'
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
     }
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center bg-[#fff9f2] px-4 py-8">
+        <main className="min-h-screen flex flex-col items-center justify-center bg-[#126E72] px-4 py-8">
+            <Header />
             <TripForm
                 onItineraryGenerated={handleItineraryGenerated}
                 onItineraryLoading={handleItineraryLoading}
