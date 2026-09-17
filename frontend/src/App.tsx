@@ -21,7 +21,7 @@ function App() {
     }
 
     return (
-        <>
+        <main className="min-h-screen flex flex-col items-center justify-center bg-[#fff9f2] px-4 py-8">
             <TripForm
                 onItineraryGenerated={handleItineraryGenerated}
                 onItineraryLoading={handleItineraryLoading}
@@ -33,7 +33,7 @@ function App() {
                     itineraryReset={handleItineraryReset}
                 />
             )}
-        </>
+        </main>
     )
 }
 
