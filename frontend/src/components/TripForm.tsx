@@ -41,125 +41,152 @@ export default function TripForm({
         <div className="w-full max-w-xs">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col gap-5"
             >
-                <label>Enter your destination:</label>
-                <input
-                    type="text"
-                    value={formData.destination || ''}
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            destination: e.target.value,
-                        })
-                    }
-                ></input>
-
-                <label>Enter the number of days you will stay for:</label>
-                <input
-                    type="number"
-                    value={formData.days || ''}
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            days: parseInt(e.target.value) || 0,
-                        })
-                    }
-                ></input>
-
-                <label>Enter your budget (£):</label>
-                <input
-                    type="number"
-                    value={formData.budget || ''}
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            budget: parseInt(e.target.value),
-                        })
-                    }
-                ></input>
-
-                <label>
-                    Enter your pace preference of your trip (fast, medium,
-                    slow):
-                </label>
-                <label>
+                <div>
+                    <label>Enter your destination:</label>
                     <input
-                        type="radio"
-                        name="pace"
-                        value="slow"
+                        className="placeholder:text-gray-500 placeholder:italic"
+                        placeholder="Bilbao, Spain"
+                        type="text"
+                        value={formData.destination || ''}
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
-                                pace_preference: e.target.value,
+                                destination: e.target.value,
                             })
                         }
                     ></input>
-                    Slow paced
-                </label>
-                <label>
+                </div>
+
+                <div>
+                    <label>Enter the number of days you will stay for:</label>
                     <input
-                        type="radio"
-                        name="pace"
-                        value="medium"
+                        className="placeholder:text-gray-500 placeholder:italic"
+                        placeholder="5"
+                        type="number"
+                        value={formData.days || ''}
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
-                                pace_preference: e.target.value,
+                                days: parseInt(e.target.value) || 0,
                             })
                         }
                     ></input>
-                    Medium paced
-                </label>
-                <label>
+                </div>
+
+                <div>
+                    <label>Enter your budget (£):</label>
                     <input
-                        type="radio"
-                        name="pace"
-                        value="fast"
+                        className="placeholder:text-gray-500 placeholder:italic"
+                        placeholder="200"
+                        type="number"
+                        value={formData.budget || ''}
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
-                                pace_preference: e.target.value,
+                                budget: parseInt(e.target.value),
                             })
                         }
                     ></input>
-                    Fast paced
-                </label>
+                </div>
 
-                <label>Enter your interests below:</label>
-                <input
-                    type="text"
-                    value={formData.interests || ''}
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            interests: e.target.value.split(','),
-                        })
-                    }
-                ></input>
+                <div>
+                    <label>
+                        Enter your pace preference of your trip (fast, medium,
+                        slow):
+                    </label>
+                    <div className="flex flex-col">
+                        <label>
+                            <input
+                                type="radio"
+                                name="pace"
+                                value="slow"
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        pace_preference: e.target.value,
+                                    })
+                                }
+                            ></input>
+                            Slow paced
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="pace"
+                                value="medium"
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        pace_preference: e.target.value,
+                                    })
+                                }
+                            ></input>
+                            Medium paced
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="pace"
+                                value="fast"
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        pace_preference: e.target.value,
+                                    })
+                                }
+                            ></input>
+                            Fast paced
+                        </label>
+                    </div>
+                </div>
 
-                <label>Enter the number of travellers:</label>
-                <input
-                    type="number"
-                    value={formData.number_of_travellers || ''}
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            number_of_travellers: parseInt(e.target.value),
-                        })
-                    }
-                ></input>
+                <div>
+                    <label>Enter your interests below:</label>
+                    <input
+                        className="placeholder:text-gray-500 placeholder:italic"
+                        placeholder="Food, Art, Sightseeing, Sunsets, Instagram..."
+                        type="text"
+                        value={formData.interests || ''}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                interests: e.target.value.split(','),
+                            })
+                        }
+                    ></input>
+                </div>
 
-                <p>Destination: {formData.destination}</p>
-                <p>Number of days: {formData.days || 0}</p>
-                <p>Budget: {formData.budget || 0}</p>
-                <p>Pace: {formData.pace_preference}</p>
-                <p>Interests: {formData.interests}</p>
-                <p>
-                    Number of travellers: {formData.number_of_travellers || 1}
-                </p>
+                <div>
+                    <label>Enter the number of travellers:</label>
+                    <input
+                        className="placeholder:text-gray-500 placeholder:italic"
+                        placeholder="2"
+                        type="number"
+                        value={formData.number_of_travellers || ''}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                number_of_travellers: parseInt(e.target.value),
+                            })
+                        }
+                    ></input>
+                </div>
 
-                <button type="submit">Get Itinerary</button>
+                <div>
+                    <p>Destination: {formData.destination}</p>
+                    <p>Number of days: {formData.days || 0}</p>
+                    <p>Budget: {formData.budget || 0}</p>
+                    <p>Pace: {formData.pace_preference}</p>
+                    <p>Interests: {formData.interests}</p>
+                    <p>
+                        Number of travellers:{' '}
+                        {formData.number_of_travellers || 1}
+                    </p>
+
+                    <button type="submit">Get Itinerary</button>
+                </div>
             </form>
         </div>
     )
