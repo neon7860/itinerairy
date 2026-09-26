@@ -7,12 +7,19 @@ from fastapi import HTTPException
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+
+client = OpenAI(
+    base_url=endpoint,
+    api_key=api_key
+)
 
 def generate_itinerary(trip: TripRequest):
-    completion = client.chat.completions.create(
-        model="gpt-5.4-nano",
-        messages=[
+    response = client.responses.create(
+        model=deployment_name,
+        input=[
             {"role": "system", "content": """
 You are an expert travel planner with deep knowledge of destinations worldwide. 
 You create detailed, personalised day-by-day itineraries based on the traveller's 
@@ -55,7 +62,7 @@ Rules:
         ]
     )
     try:
-        raw = json.loads(completion.choices[0].message.content)
+        raw = json.loads(response.output_text)
         return TripResponse(**raw)
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="AI returned invalid JSON")
