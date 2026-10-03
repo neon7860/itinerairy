@@ -19,6 +19,7 @@ client = OpenAI(
 def generate_itinerary(trip: TripRequest):
     response = client.responses.create(
         model=deployment_name,
+        reasoning={"effort": "low"},
         input=[
             {"role": "system", "content": """
 You are an expert travel planner with deep knowledge of destinations worldwide. 
