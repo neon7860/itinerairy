@@ -22,7 +22,9 @@ function App() {
     }
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center bg-[#126E72] px-4 py-8">
+        <main className="relative isolate flex min-h-screen flex-col items-center overflow-hidden bg-[#FFF9F2] px-4 py-10 sm:py-14">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-28 -top-32 -z-10 h-96 w-96 rounded-full bg-[#126E72]/10 blur-3xl" />
+            <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-24 -z-10 h-96 w-96 rounded-full bg-[#E76F51]/10 blur-3xl" />
             <Header />
             <TripForm
                 onItineraryGenerated={handleItineraryGenerated}
