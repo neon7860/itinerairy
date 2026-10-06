@@ -215,24 +215,44 @@ export default function TripForm({
                             >
                                 What do you love doing?
                             </label>
-                            <input
-                                id="interests"
-                                className="w-full rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
-                                placeholder="Food, art, history, beaches…"
-                                type="text"
-                                value={formData.interests.join(', ')}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        interests: e.target.value
-                                            .split(',')
-                                            .map((interest) => interest.trim()),
-                                    })
-                                }
-                            />
+                            <div className="w-full flex gap-2">
+                                <input
+                                    id="interests"
+                                    className="min-w-0 flex-1 rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
+                                    placeholder="Food, art, history, beaches…"
+                                    type="text"
+                                    value={formData.interests.join(', ')}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            interests: e.target.value
+                                                .split(',')
+                                                .map((interest) =>
+                                                    interest.trim()
+                                                ),
+                                        })
+                                    }
+                                />
+                                <button className="shrink-0 cursor-pointer rounded-lg bg-[#126E72] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0f5e62] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#126E72]/30">
+                                    Add interest
+                                </button>
+                            </div>
                             <p className="mt-2 text-xs text-[#123047]/55">
                                 Separate a few interests with commas.
                             </p>
+                            <div className="flex flex-wrap gap-2">
+                                {formData.interests.map((interest) => {
+                                    return (
+                                        <div>
+                                            <ul>
+                                                <li className="w-fit rounded-full border border-[#123047]/20 px-3 py-1.5 text-sm">
+                                                    {interest}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
                         <div>
                             <label
