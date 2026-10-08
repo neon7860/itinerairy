@@ -21,8 +21,9 @@ export default function TripForm({
     }
 
     const [formData, setFormData] = useState<TripRequest>(initialFormState)
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
+    const [interestInput, setInterestInput] = useState<string>('')
 
     async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault()
@@ -221,19 +222,24 @@ export default function TripForm({
                                     className="min-w-0 flex-1 rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
                                     placeholder="Food, art, history, beaches…"
                                     type="text"
-                                    value={formData.interests.join(', ')}
+                                    value={interestInput}
                                     onChange={(e) =>
-                                        setFormData({
-                                            ...formData,
-                                            interests: e.target.value
-                                                .split(',')
-                                                .map((interest) =>
-                                                    interest.trim()
-                                                ),
-                                        })
+                                        setInterestInput(e.target.value)
                                     }
                                 />
-                                <button className="shrink-0 cursor-pointer rounded-lg bg-[#126E72] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0f5e62] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#126E72]/30">
+                                <button
+                                    className="shrink-0 cursor-pointer rounded-lg bg-[#126E72] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0f5e62] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#126E72]/30"
+                                    onClick={(e) => {
+                                        setFormData({
+                                            ...formData,
+                                            interests: [
+                                                ...formData.interests,
+                                                interestInput,
+                                            ],
+                                        })
+                                        e.preventDefault()
+                                    }}
+                                >
                                     Add interest
                                 </button>
                             </div>
@@ -245,7 +251,7 @@ export default function TripForm({
                                     return (
                                         <div>
                                             <ul>
-                                                <li className="w-fit rounded-full border border-[#123047]/20 px-3 py-1.5 text-sm">
+                                                <li className="mt-2 w-fit rounded-full border border-[#123047]/20 px-3 py-1.5 text-sm">
                                                     {interest}
                                                 </li>
                                             </ul>
