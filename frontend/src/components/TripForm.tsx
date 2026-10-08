@@ -220,7 +220,7 @@ export default function TripForm({
                                 <input
                                     id="interests"
                                     className="min-w-0 flex-1 rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
-                                    placeholder="Food, art, history, beaches…"
+                                    placeholder="Food..."
                                     type="text"
                                     value={interestInput}
                                     onChange={(e) =>
@@ -237,14 +237,14 @@ export default function TripForm({
                                                 interestInput,
                                             ],
                                         })
-                                        e.preventDefault()
                                     }}
+                                    type="button"
                                 >
                                     Add interest
                                 </button>
                             </div>
                             <p className="mt-2 text-xs text-[#123047]/55">
-                                Separate a few interests with commas.
+                                Type an interest and click add!
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 {formData.interests.map((interest) => {
@@ -253,6 +253,30 @@ export default function TripForm({
                                             <ul>
                                                 <li className="mt-2 w-fit rounded-full border border-[#123047]/20 px-3 py-1.5 text-sm">
                                                     {interest}
+                                                    <button
+                                                        className="ml-2 inline-flex size-5 cursor-pointer items-center justify-center rounded-full text-[#123047]/60 transition hover:bg-[#123047]/10 hover:text-[#123047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126E72]"
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setFormData(
+                                                                (prev) => ({
+                                                                    ...prev,
+                                                                    interests:
+                                                                        prev.interests.filter(
+                                                                            (
+                                                                                item
+                                                                            ) => {
+                                                                                return (
+                                                                                    item !==
+                                                                                    interest
+                                                                                )
+                                                                            }
+                                                                        ),
+                                                                })
+                                                            )
+                                                        }}
+                                                    >
+                                                        ×
+                                                    </button>
                                                 </li>
                                             </ul>
                                         </div>
