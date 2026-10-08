@@ -237,6 +237,8 @@ export default function TripForm({
                                                 interestInput,
                                             ],
                                         })
+
+                                        setInterestInput('')
                                     }}
                                     type="button"
                                 >
