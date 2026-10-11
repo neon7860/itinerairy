@@ -19,6 +19,7 @@ client = OpenAI(
 def generate_itinerary(trip: TripRequest):
     response = client.responses.create(
         model=deployment_name,
+        max_output_tokens=min(2500 + trip.days * 600, 9000),
         reasoning={"effort": "low"},
         input=[
             {"role": "system", "content": """
@@ -67,5 +68,7 @@ Rules:
         return TripResponse(**raw)
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="AI returned invalid JSON")
+    except response.status == "incomplete":
+        raise HTTPException(status_code=502, detail="Itinerary was too long to generate, try fewer days")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Something went wrong: {e}")
