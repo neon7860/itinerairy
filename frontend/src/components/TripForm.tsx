@@ -222,7 +222,7 @@ export default function TripForm({
                                 />
                                 <button
                                     className="shrink-0 cursor-pointer rounded-lg bg-[#126E72] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0f5e62] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#126E72]/30"
-                                    onClick={(e) => {
+                                    onClick={() => {
                                         setFormData({
                                             ...formData,
                                             interests: [
