@@ -5,10 +5,10 @@ export default function Header() {
                 ItinerAIry <span aria-hidden="true"></span>
             </p>
             <h1 className="text-3xl font-extrabold tracking-tight text-[#123047] sm:text-4xl">
-                Make room for adventure
+                Plan your trip in minutes
             </h1>
             <p className="mt-3 text-base text-[#123047]/70 sm:text-lg">
-                Tell us where you’re going. We’ll help make every day count.
+                Pick a destination, budget and pace. Get a day-by-day plan.
             </p>
         </div>
     )

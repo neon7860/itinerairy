@@ -51,16 +51,9 @@ export default function TripForm({
                 className="overflow-hidden rounded-3xl border border-[#123047]/10 bg-white shadow-[0_24px_70px_-28px_rgba(18,48,71,0.35)]"
             >
                 <div className="border-b border-[#123047]/10 bg-[#FFF9F2] px-6 py-6 sm:px-9">
-                    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#126E72]/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#126E72]">
-                        <span aria-hidden="true">✦</span> Your trip, your way
-                    </div>
                     <h2 className="text-2xl font-bold tracking-tight text-[#123047] sm:text-3xl">
-                        Let’s plan somewhere wonderful
+                        Trip details
                     </h2>
-                    <p className="mt-2 max-w-xl text-sm leading-6 text-[#123047]/70 sm:text-base">
-                        Share a few details and we’ll shape them into a
-                        day-by-day adventure.
-                    </p>
                 </div>
 
                 <div className="space-y-7 px-6 py-7 sm:px-9 sm:py-9">
