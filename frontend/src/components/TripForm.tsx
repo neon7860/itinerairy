@@ -24,6 +24,8 @@ export default function TripForm({
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [interestInput, setInterestInput] = useState<string>('')
+    const today = new Date()
+    const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
 
     async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault()
@@ -111,6 +113,23 @@ export default function TripForm({
                                 </span>
                             </div>
                         </div>
+
+                        <div>
+                            <label
+                                htmlFor="start_date"
+                                className="mb-2 block text-sm font-semibold text-[#123047]"
+                            >
+                                When do you plan to leave?
+                            </label>
+                            <div>
+                                <input
+                                    type="date"
+                                    id="start_date"
+                                    min={minDate}
+                                ></input>
+                            </div>
+                        </div>
+
                         <div>
                             <label
                                 htmlFor="budget"
@@ -230,7 +249,7 @@ export default function TripForm({
                                                 interestInput,
                                             ],
                                         })
-
+                                        console.log(minDate)
                                         setInterestInput('')
                                     }}
                                     type="button"

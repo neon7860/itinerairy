@@ -16,7 +16,9 @@ export default function ItineraryDisplay({
     return (
         <div className="w-full max-w-3xl">
             {isLoading ? (
-                <HashLoader color="#126E72" size={100} />
+                <div className="flex justify-center">
+                    <HashLoader color="#126E72" size={100} />
+                </div>
             ) : itinerary !== null ? (
                 <div className="overflow-hidden rounded-3xl border border-[#123047]/10 bg-white shadow-[0_24px_70px_-28px_rgba(18,48,71,0.35)]">
                     <div className="border-b border-[#123047]/10 bg-[#FFF9F2] px-6 py-6 sm:px-9">

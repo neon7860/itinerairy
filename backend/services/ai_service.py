@@ -34,6 +34,7 @@ The JSON must follow this exact structure:
 {
     "destination": "string",
     "days": integer,
+    "start_date": date,
     "estimated_costs": float,
     "day_plans": [
         {

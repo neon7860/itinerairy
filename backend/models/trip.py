@@ -1,8 +1,10 @@
 from pydantic import BaseModel
+from datetime import date
 
 class TripRequest(BaseModel):
     destination: str
     days: int
+    start_date: date
     budget: float
     pace_preference: str
     interests: list[str]
@@ -19,6 +21,10 @@ class DayPlan(BaseModel):
 class TripResponse(BaseModel):
     destination: str
     days: int
+    start_date: date
     estimated_costs: float
     day_plans: list[DayPlan]
 
+# class TripEvent(BaseModel):
+
+    
