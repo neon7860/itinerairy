@@ -4,7 +4,7 @@ from datetime import date
 class TripRequest(BaseModel):
     destination: str
     days: int
-    start_date: date
+    start_date: str
     budget: float
     pace_preference: str
     interests: list[str]
@@ -21,7 +21,7 @@ class DayPlan(BaseModel):
 class TripResponse(BaseModel):
     destination: str
     days: int
-    start_date: date
+    start_date: str
     estimated_costs: float
     day_plans: list[DayPlan]
 

@@ -11,9 +11,13 @@ export default function TripForm({
     onItineraryGenerated,
     onItineraryLoading,
 }: TripResponseForm) {
+    const today = new Date()
+    const todayString = createReadableDate(today)
+
     const initialFormState: TripRequest = {
         destination: '',
         days: 0,
+        start_date: todayString,
         budget: 0,
         pace_preference: '',
         interests: [],
@@ -24,8 +28,16 @@ export default function TripForm({
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [interestInput, setInterestInput] = useState<string>('')
-    const today = new Date()
-    const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+
+    const [year, month, day] = formData.start_date.split('-').map(Number)
+    const tripEndDate = new Date(year, month - 1, day)
+    tripEndDate.setDate(tripEndDate.getDate() + formData.days - 1)
+    const endDate = createReadableDate(tripEndDate)
+
+    function createReadableDate(date: Date) {
+        const readableDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+        return readableDate
+    }
 
     async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault()
@@ -125,9 +137,18 @@ export default function TripForm({
                                 <input
                                     type="date"
                                     id="start_date"
-                                    min={minDate}
+                                    min={todayString}
+                                    value={formData.start_date}
+                                    onChange={(e) => {
+                                        setFormData({
+                                            ...formData,
+                                            start_date: e.target.value,
+                                        })
+                                    }}
+                                    className="w-full rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
                                 ></input>
                             </div>
+                            <p className="mb-3 mt-1 text-sm text-[#123047]/60">{`Your trip ends on ${endDate}`}</p>
                         </div>
 
                         <div>
@@ -249,7 +270,6 @@ export default function TripForm({
                                                 interestInput,
                                             ],
                                         })
-                                        console.log(minDate)
                                         setInterestInput('')
                                     }}
                                     type="button"
