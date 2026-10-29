@@ -2,6 +2,7 @@ from models.trip import TripRequest, TripResponse
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
+import requests
 
 load_dotenv()
 
@@ -12,4 +13,5 @@ def search_events(trip: TripRequest):
     time_period = datetime.fromisoformat(trip_start) + timedelta(days=(trip.days - 1))
     trip_end = time_period.isoformat()
 
+    response = requests.get(f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={api_key}")
     
