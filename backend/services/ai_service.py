@@ -5,8 +5,11 @@ from dotenv import load_dotenv
 import json
 from fastapi import HTTPException
 from services.ticketmaster_service import search_events
+import logging
 
 load_dotenv()
+
+logger = logging.getLogger(__name__)
 
 endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
@@ -19,6 +22,7 @@ client = OpenAI(
 
 def generate_itinerary(trip: TripRequest):
     events = search_events(trip)
+    logger.info("Ticketmaster lookup completed; starting itinerary generation")
     print("Ticketmaster events:", events)
 
     response = client.responses.create(
