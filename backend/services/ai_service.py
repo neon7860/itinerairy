@@ -4,6 +4,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import json
 from fastapi import HTTPException
+from services.ticketmaster_service import search_events
 
 load_dotenv()
 
@@ -17,6 +18,9 @@ client = OpenAI(
 )
 
 def generate_itinerary(trip: TripRequest):
+    events = search_events(trip)
+    print("Ticketmaster events:", events)
+
     response = client.responses.create(
         model=deployment_name,
         max_output_tokens=min(2500 + trip.days * 600, 9000),
@@ -59,7 +63,8 @@ Rules:
                 "role": "user", 
                 "content": f"""
                 Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of £{trip.budget} for {trip.number_of_travellers} traveller(s). 
-                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}
+                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}.
+                Here are some results from ticketmaster which you can use to help make the plan. Ensure to reference that you got them from ticketmaster if used in the plan: {events}.
 """
             }
         ]

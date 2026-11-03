@@ -8,10 +8,18 @@ load_dotenv()
 
 def search_events(trip: TripRequest):
     api_key = os.getenv("TICKETMASTER_DISCOVERY_API_KEY")
-    trip_start = trip.start_date
+    start_date = datetime.fromisoformat(trip.start_date).date()
+    end_date = start_date + timedelta(days=trip.days - 1)
 
-    time_period = datetime.fromisoformat(trip_start) + timedelta(days=(trip.days - 1))
-    trip_end = time_period.isoformat()
-
-    response = requests.get(f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={api_key}")
-    
+    response = requests.get(
+        "https://app.ticketmaster.com/discovery/v2/events.json",
+        params={
+            "apikey": api_key,
+            "city": trip.destination,
+            "startDateTime": f"{start_date:%Y-%m-%d}T00:00:00Z",
+            "endDateTime": f"{end_date:%Y-%m-%d}T23:59:59Z",
+        },
+        timeout=10,
+    )
+    response.raise_for_status()
+    return response.json()
