@@ -1,4 +1,6 @@
 import type { DayPlan } from '../types'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface DayCardProps {
     day: DayPlan
@@ -39,7 +41,22 @@ export default function DayCard({ day }: DayCardProps) {
                             {period}
                         </h4>
                         <p className="text-sm leading-6 text-[#123047]/80">
-                            {plan}
+                            {/* Custom a html tag css */}
+                            <Markdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{
+                                    a: ({ node: _node, ...props }) => (
+                                        <a
+                                            {...props}
+                                            className="font-medium text-[#126E72] underline decoration-[#126E72]/50 underline-offset-2 hover:text-[#0f5e62] hover:decoration-[#0f5e62]"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        />
+                                    ),
+                                }}
+                            >
+                                {plan}
+                            </Markdown>
                         </p>
                     </section>
                 ))}
