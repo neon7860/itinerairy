@@ -6,6 +6,7 @@ export interface TripRequest {
     pace_preference: string
     interests: string[]
     number_of_travellers: number
+    holiday_type: 'solo' | 'couple' | 'friends' | 'family' | null
 }
 
 export interface DayPlan {

@@ -80,8 +80,8 @@ Rules:
                 "role": "user", 
                 "content": f"""
                 Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of £{trip.budget} for {trip.number_of_travellers} traveller(s). 
-                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}.
-                Here are some results from ticketmaster which you can use to help make the plan. Ensure to reference that you got them from ticketmaster if used in the plan: {events}.
+                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}. The traveller wants a holiday type of {trip.holiday_type}.
+                Here are some results from ticketmaster which you can use to help make the plan (Do not feel obligated to use them if you feel it isn't necessary.). Ensure to reference that you got them from ticketmaster if used in the plan: {events}.
 """
             }
         ]

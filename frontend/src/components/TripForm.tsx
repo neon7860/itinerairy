@@ -22,6 +22,7 @@ export default function TripForm({
         pace_preference: '',
         interests: [],
         number_of_travellers: 0,
+        holiday_type: null,
     }
 
     const [formData, setFormData] = useState<TripRequest>(initialFormState)
@@ -151,6 +152,67 @@ export default function TripForm({
                             <p className="mb-3 mt-1 text-sm text-[#123047]/60">{`Your trip ends on ${endDate}`}</p>
                         </div>
 
+                        <fieldset className="sm:col-span-2">
+                            <legend className="text-sm font-semibold text-[#123047]">
+                                Who's coming?
+                            </legend>
+                            <div className="grid gap-3 sm:grid-cols-4">
+                                {[
+                                    {
+                                        value: 'solo',
+                                        label: 'Solo',
+                                        detail: 'Just me',
+                                    },
+                                    {
+                                        value: 'couple',
+                                        label: 'Couple',
+                                        detail: 'A romantic getaway',
+                                    },
+                                    {
+                                        value: 'friends',
+                                        label: 'Friends',
+                                        detail: 'A group of mates',
+                                    },
+                                    {
+                                        value: 'family',
+                                        label: 'Family',
+                                        detail: 'Kids or relatives along',
+                                    },
+                                ].map((group) => (
+                                    <label
+                                        key={group.value}
+                                        className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${formData.holiday_type === group.value ? 'border-[#126E72] bg-[#126E72]/5 ring-2 ring-[#126E72]/15' : 'border-[#123047]/15 hover:border-[#126E72]/50 hover:bg-[#FFF9F2]'}`}
+                                    >
+                                        <input
+                                            className="mt-1 accent-[#126E72]"
+                                            type="radio"
+                                            name="holiday_type"
+                                            value={group.value}
+                                            checked={
+                                                formData.holiday_type ===
+                                                group.value
+                                            }
+                                            onChange={(e) =>
+                                                setFormData({
+                                                    ...formData,
+                                                    holiday_type: e.target
+                                                        .value as TripRequest['holiday_type'],
+                                                })
+                                            }
+                                        />
+                                        <span>
+                                            <span className="block text-sm font-semibold text-[#123047]">
+                                                {group.label}
+                                            </span>
+                                            <span className="mt-0.5 block text-xs text-[#123047]/60">
+                                                {group.detail}
+                                            </span>
+                                        </span>
+                                    </label>
+                                ))}
+                            </div>
+                        </fieldset>
+
                         <div>
                             <label
                                 htmlFor="budget"
@@ -179,6 +241,38 @@ export default function TripForm({
                                     }
                                 />
                             </div>
+                        </div>
+
+                        <div>
+                            <label
+                                htmlFor="travellers"
+                                className="mb-2 block text-sm font-semibold text-[#123047]"
+                            >
+                                Travellers
+                            </label>
+                            <input
+                                id="travellers"
+                                className="w-full rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
+                                type="number"
+                                min="1"
+                                max="20"
+                                placeholder="2"
+                                required
+                                value={
+                                    formData.holiday_type === 'solo'
+                                        ? 1
+                                        : formData.number_of_travellers || ''
+                                }
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        number_of_travellers:
+                                            formData.holiday_type === 'solo'
+                                                ? 1
+                                                : parseInt(e.target.value) || 0,
+                                    })
+                                }
+                            />
                         </div>
                     </div>
 
@@ -322,31 +416,6 @@ export default function TripForm({
                                     )
                                 })}
                             </div>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="travellers"
-                                className="mb-2 block text-sm font-semibold text-[#123047]"
-                            >
-                                Travellers
-                            </label>
-                            <input
-                                id="travellers"
-                                className="w-full rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
-                                type="number"
-                                min="1"
-                                max="20"
-                                placeholder="2"
-                                required
-                                value={formData.number_of_travellers || ''}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        number_of_travellers:
-                                            parseInt(e.target.value) || 0,
-                                    })
-                                }
-                            />
                         </div>
                     </div>
 

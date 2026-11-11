@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from typing import Literal
 
 class TripRequest(BaseModel):
     destination: str
@@ -9,6 +9,7 @@ class TripRequest(BaseModel):
     pace_preference: str
     interests: list[str]
     number_of_travellers: int
+    holiday_type: Literal["solo", "couple", "friends", "family"] | None = None
 
 class DayPlan(BaseModel):
     location: str
