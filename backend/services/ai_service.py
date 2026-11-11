@@ -75,12 +75,13 @@ Rules:
 - Use Ticketmaster events only when they fall within the requested trip dates and match the destination
 - Do not invent Ticketmaster results or claim events are available unless they appear in the supplied results
 - If no relevant Ticketmaster events are supplied, do not imply that any were found
+- Do not feel obligated to use Ticketmaster events if you feel it isn't necessary.
  """},
             {
                 "role": "user", 
                 "content": f"""
                 Please create a clear optimal {trip.days} day trip plan to {trip.destination} with a budget of £{trip.budget} for {trip.number_of_travellers} traveller(s). 
-                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}.
+                The trip pacing should be {trip.pace_preference}. The traveller interests include {trip.interests}. The traveller wants a holiday type of {trip.holiday_type}.
                 Here are some results from ticketmaster which you can use to help make the plan. Ensure to reference that you got them from ticketmaster if used in the plan: {events}.
 """
             }
