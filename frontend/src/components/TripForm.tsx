@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import type { TripRequest, TripResponse } from '../types.ts'
 import { generateItinerary } from '../services/api.ts'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css'
+import {
+    GeoapifyContext,
+    GeoapifyGeocoderAutocomplete,
+} from '@geoapify/react-geocoder-autocomplete'
 
 interface TripResponseForm {
     onItineraryGenerated: (data: TripResponse) => void
@@ -79,7 +84,7 @@ export default function TripForm({
                         >
                             Where are you headed?
                         </label>
-                        <input
+                        {/* <input
                             id="destination"
                             className="w-full rounded-xl border border-[#123047]/20 bg-white px-4 py-3 text-[#123047] outline-none transition placeholder:text-[#123047]/40 focus:border-[#126E72] focus:ring-4 focus:ring-[#126E72]/10"
                             placeholder="e.g. Bilbao, Spain"
@@ -93,7 +98,24 @@ export default function TripForm({
                                     destination: e.target.value,
                                 })
                             }
-                        />
+                        /> */}
+                        <GeoapifyContext
+                            apiKey={import.meta.env.VITE_GEOAPIFY_API_KEY}
+                        >
+                            <GeoapifyGeocoderAutocomplete
+                                placeholder="Enter an address"
+                                limit={5}
+                                placeSelect={(feature) => {
+                                    setFormData({
+                                        ...formData,
+                                        destination:
+                                            feature.properties.formatted,
+                                    })
+                                    console.log(feature.properties.city)
+                                }}
+                                type="city"
+                            />
+                        </GeoapifyContext>
                     </div>
 
                     <div className="grid gap-5 sm:grid-cols-2">

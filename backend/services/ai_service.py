@@ -44,9 +44,9 @@ whose headings are already displayed by the app. Do not include period labels su
 
 Use Markdown only for inline emphasis (for example, **bold text**) and links
 (for example, [place name](https://example.com)). Do not use headings, lists,
-blockquotes, code fences, HTML, or strikethrough (~~text~~). Provide only the final
-recommendation; do not show edits, crossed-out text, alternatives, or commentary about
-changing your recommendation.
+blockquotes, code fences, HTML, or strikethrough. Never output `~~`, `<del>`, or
+`</del>` formatting. Provide only the final recommendation; do not show edits,
+crossed-out text, alternatives, or commentary about changing your recommendation.
 
 The JSON must follow this exact structure:
 {
